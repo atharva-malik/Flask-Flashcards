@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Deck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <h1>Create Deck</h1>
+    <form method="POST">
+        <div class="form-group">
+        <label for="deck_name">Deck Name:</label>
+        <input type="text" class="form-control" id="deck_name" name="deck_name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</body>
+</html>

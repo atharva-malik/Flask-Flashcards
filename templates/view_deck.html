@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Deck - {{ deck_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+  <h1>{{ deck_name }}</h1>
+  {% if deck %}
+  {% if flag == "True" %}
+  {% for card in deck %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <p id="card-content">{{ card["question"] }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  {% else %}
+  {% for card in deck %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <p id="card-content">{{ card["answer"] }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  {% endif %}
+  <form method="POST">
+    <button type="submit" class="btn btn-primary">Flip All</button>
+  </form>
+    <nav aria-label="Page navigation example">
+    </nav>
+  <form method="POST">
+    <div class="form-group">
+      <label for="question">New Question:</label>
+      <input type="text" class="form-control" id="question" name="question" required>
+    </div>
+    <div class.form-group>
+      <label for="answer">New Answer:</label>
+      <input type="text" class="form-control" id="answer" name="answer" required>
+    </div>
+    <button type="submit" class="btn btn-success">Add Card</button>
+  </form>
+  <script>
+    function flipAll(card) {
+      const cardContent = document.getElementById("card-content");
+      if (cardContent.textContent === deck[current_card]["question"]) {
+        cardContent.textContent = deck[current_card]["answer"];
+      } else {
+        cardContent.textContent = deck[current_card]["question"];
+      }
+    }
+  </script>
+  {% else %}
+    <p>No cards in this deck yet!</p>
+    <form method="POST">
+      <div class="form-group">
+        <label for="question">New Question:</label>
+        <input type="text" class="form-control" id="question" name="question" required>
+      </div>
+      <div class.form-group>
+        <label for="answer">New Answer:</label>
+        <input type="text" class="form-control" id="answer" name="answer" required>
+      </div>
+      <button type="submit" class="btn btn-success">Add Card</button>
+    </form>
+  {% endif %}
+</body>
+</html>
